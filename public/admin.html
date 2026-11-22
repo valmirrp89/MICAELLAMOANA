@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel da Festa | 4º Aniversário da Micaella</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Nunito:wght@400;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css?v=2.1">
+  <style>
+    .admin-body { background: #040f1c; color: #fffdf7; min-height: 100vh; display: flex; flex-direction: column; }
+    .admin-nav { background: #06192e; border-bottom: 1px solid rgba(255, 209, 102, 0.3); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+    .nav-brand { display: flex; align-items: center; gap: 10px; }
+    .nav-brand h2 { font-family: var(--font-cinematic); font-size: 1.2rem; letter-spacing: 2px; color: var(--primary-gold); }
+    .nav-actions { display: flex; gap: 12px; align-items: center; }
+    .admin-container { max-width: 1200px; margin: 0 auto; padding: 30px 20px; flex: 1; width: 100%; }
+
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 28px; }
+    .kpi-card { background: rgba(6, 25, 46, 0.75); border: 1px solid rgba(255, 209, 102, 0.25); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 6px; }
+    .kpi-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255, 253, 247, 0.7); }
+    .kpi-value { font-size: 2.2rem; font-weight: 800; color: var(--primary-gold); line-height: 1; }
+    .kpi-sub { font-size: 0.8rem; color: var(--tropical-turquoise); }
+
+    .admin-tabs { display: flex; gap: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 24px; }
+    .tab-btn { background: none; border: none; padding: 12px 20px; color: rgba(255, 253, 247, 0.7); font-size: 1rem; font-weight: 600; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; }
+    .tab-btn.active { color: var(--primary-gold); border-bottom-color: var(--primary-gold); }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    .table-controls { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
+    .search-input { max-width: 350px; width: 100%; padding: 10px 16px; background: rgba(3, 15, 28, 0.8); border: 1px solid rgba(255, 209, 102, 0.25); border-radius: 12px; color: #fff; }
+    .table-actions { display: flex; gap: 10px; }
+
+    .btn-export { background: #107c41; color: #fff; padding: 10px 18px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; transition: background 0.2s; }
+    .btn-export:hover { background: #0c6032; }
+
+    .guests-table-wrap { background: rgba(6, 25, 46, 0.6); border: 1px solid rgba(255, 209, 102, 0.25); border-radius: 16px; overflow-x: auto; }
+    .guests-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.92rem; }
+    .guests-table th, .guests-table td { padding: 14px 18px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+    .guests-table th { background: rgba(3, 15, 28, 0.8); color: var(--primary-gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+    .status-tag { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; display: inline-block; }
+    .status-confirmed { background: rgba(6, 214, 160, 0.2); color: var(--tropical-turquoise); border: 1px solid var(--tropical-turquoise); }
+    .status-declined { background: rgba(230, 57, 70, 0.2); color: var(--sunset-coral); border: 1px solid var(--sunset-coral); }
+
+    .btn-del-guest { background: rgba(230, 57, 70, 0.15); border: 1px solid rgba(230, 57, 70, 0.4); color: var(--sunset-coral); padding: 6px 10px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; }
+    .btn-del-guest:hover { background: var(--sunset-coral); color: #fff; }
+
+    .edit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+    .edit-panel { background: rgba(6, 25, 46, 0.7); border: 1px solid rgba(255, 209, 102, 0.25); border-radius: 18px; padding: 22px; }
+    .edit-panel h4 { font-size: 1.1rem; color: var(--primary-gold); margin-bottom: 16px; border-bottom: 1px solid rgba(255, 209, 102, 0.2); padding-bottom: 8px; }
+
+    .login-overlay { position: fixed; inset: 0; background: #030d1a; z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .login-box { max-width: 400px; width: 100%; background: #06192e; border: 1px solid var(--primary-gold); border-radius: 24px; padding: 32px 24px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.7); }
+  </style>
+</head>
+<body class="admin-body">
+
+  <!-- OVERLAY DE LOGIN -->
+  <div id="login-modal" class="login-overlay">
+    <div class="login-box">
+      <div style="font-size: 2.5rem; margin-bottom: 12px;">🔒</div>
+      <h3 style="font-family: var(--font-cinematic); color: var(--primary-gold); margin-bottom: 8px;">Área Restrita</h3>
+      <p style="font-size: 0.85rem; color: rgba(255, 253, 247, 0.7); margin-bottom: 20px;">
+        Digite a senha para gerenciar os convidados da festa da Micaella.
+      </p>
+      
+      <form id="admin-login-form" onsubmit="handleAdminLogin(event)">
+        <div class="form-group" style="text-align: left;">
+          <label class="form-label">Senha de Acesso:</label>
+          <input type="password" id="admin-password-input" class="form-input" placeholder="Digite a senha..." required autofocus>
+        </div>
+        <p id="login-error-msg" style="color: var(--sunset-coral); font-size: 0.85rem; margin-bottom: 12px; display: none;"></p>
+        <button type="submit" class="btn-submit-luxury" style="margin-top: 5px;">Entrar no Painel 🔑</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- NAVEGAÇÃO -->
+  <nav class="admin-nav">
+    <div class="nav-brand">
+      <span style="font-size: 1.4rem;">🌺</span>
+      <h2>FESTA DA MICAELLA <span style="font-size: 0.8rem; color: var(--tropical-turquoise); font-family: var(--font-body);">| Gestão de Convidados</span></h2>
+    </div>
+    <div class="nav-actions">
+      <a href="index.html" target="_blank" class="luxury-pill-btn" style="background: rgba(6, 214, 160, 0.2); border-color: var(--tropical-turquoise);">
+        👁️ Ver Convite Ao Vivo
+      </a>
+      <button type="button" class="luxury-pill-btn" onclick="handleAdminLogout()">
+        Sair 🚪
+      </button>
+    </div>
+  </nav>
+
+  <!-- CONTEÚDO -->
+  <main class="admin-container">
+    
+    <!-- CARDS DE MÉTRICAS -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <span class="kpi-label">Total de Respostas</span>
+        <span class="kpi-value" id="kpi-total-responses">0</span>
+        <span class="kpi-sub">Famílias responderam</span>
+      </div>
+      <div class="kpi-card" style="border-color: var(--tropical-turquoise);">
+        <span class="kpi-label">Presenças Confirmadas</span>
+        <span class="kpi-value" id="kpi-attending" style="color: var(--tropical-turquoise);">0</span>
+        <span class="kpi-sub">Estarão presentes</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Total Adultos</span>
+        <span class="kpi-value" id="kpi-adults">0</span>
+        <span class="kpi-sub">Adultos confirmados</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Total Crianças</span>
+        <span class="kpi-value" id="kpi-children">0</span>
+        <span class="kpi-sub">Crianças confirmadas</span>
+      </div>
+      <div class="kpi-card" style="border-color: var(--primary-gold);">
+        <span class="kpi-label">Total Geral Pessoas</span>
+        <span class="kpi-value" id="kpi-total-people">0</span>
+        <span class="kpi-sub">Pessoas para o buffet</span>
+      </div>
+    </section>
+
+    <!-- ABAS -->
+    <div class="admin-tabs">
+      <button type="button" class="tab-btn active" onclick="switchAdminTab('tab-guests', this)">
+        📋 Lista de Convidados
+      </button>
+      <button type="button" class="tab-btn" onclick="switchAdminTab('tab-settings', this)">
+        ⚙️ Configurações da Festa
+      </button>
+    </div>
+
+    <!-- LISTA DE CONVIDADOS -->
+    <section id="tab-guests" class="tab-pane active">
+      <div class="table-controls">
+        <input type="text" id="guest-search-input" class="search-input" placeholder="🔍 Pesquisar por nome ou acompanhante..." oninput="filterGuestsTable()">
+        
+        <div class="table-actions">
+          <select id="guest-status-filter" class="search-input" style="width: auto;" onchange="filterGuestsTable()">
+            <option value="all">Todos os Status</option>
+            <option value="confirmed">Apenas Confirmados</option>
+            <option value="declined">Apenas Recusados</option>
+          </select>
+          <button type="button" class="btn-export" onclick="exportToCsv()">
+            📊 Exportar Excel / CSV
+          </button>
+        </div>
+      </div>
+
+      <div class="guests-table-wrap">
+        <table class="guests-table">
+          <thead>
+            <tr>
+              <th>Convidado</th>
+              <th>Status</th>
+              <th>Adultos</th>
+              <th>Crianças</th>
+              <th>Total</th>
+              <th>Acompanhantes</th>
+              <th>Mensagem</th>
+              <th>Data</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="guests-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CONFIGURAÇÕES DA FESTA -->
+    <section id="tab-settings" class="tab-pane">
+      <form id="event-settings-form" onsubmit="handleSaveEventSettings(event)">
+        <div class="edit-grid">
+          
+          <div class="edit-panel">
+            <h4>🌺 Dados da Aniversariante</h4>
+            <div class="form-group">
+              <label class="form-label">Nome da Aniversariante:</label>
+              <input type="text" id="edit-child-name" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Idade:</label>
+              <input type="text" id="edit-age" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Título do Convite:</label>
+              <input type="text" id="edit-title" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Frase de Abertura:</label>
+              <input type="text" id="edit-opening-quote" class="form-input">
+            </div>
+          </div>
+
+          <div class="edit-panel">
+            <h4>📅 Data, Horários e Local</h4>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label">Data (AAAA-MM-DD):</label>
+                <input type="date" id="edit-date" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Prazo RSVP:</label>
+                <input type="text" id="edit-rsvp-deadline" class="form-input">
+              </div>
+            </div>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label">Hora Início:</label>
+                <input type="time" id="edit-time" class="form-input">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Hora Fim:</label>
+                <input type="time" id="edit-end-time" class="form-input">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Hora do Bolo:</label>
+              <input type="text" id="edit-cake-time" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nome do Local:</label>
+              <input type="text" id="edit-location-name" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Endereço Completo:</label>
+              <input type="text" id="edit-address" class="form-input">
+            </div>
+          </div>
+
+          <div class="edit-panel">
+            <h4>🌐 Links e Mensagem</h4>
+            <div class="form-group">
+              <label class="form-label">Link do Google Maps:</label>
+              <input type="url" id="edit-maps-url" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Link do Waze:</label>
+              <input type="url" id="edit-waze-url" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Link do Grupo no WhatsApp:</label>
+              <input type="url" id="edit-whatsapp-group" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Mensagem / Aviso da Piscina:</label>
+              <textarea id="edit-description" rows="4" class="form-textarea"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Alterar Senha do Painel:</label>
+              <input type="text" id="edit-admin-password" class="form-input" placeholder="Nova senha...">
+            </div>
+
+            <button type="submit" class="btn-submit-luxury" style="margin-top: 18px;">
+              Salvar Alterações 💾
+            </button>
+          </div>
+
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <script src="admin.js?v=2.1"></script>
+</body>
+</html>

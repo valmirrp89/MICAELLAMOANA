@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>4º Aniversário da Micaella! 🌺🌊 | Convite Especial Moana</title>
+  
+  <!-- Meta tags sociais & OpenGraph -->
+  <meta name="description" content="Convite Especial do 4º Aniversário da Micaella! Venha viver uma grande aventura tropical com piscina, sol e alegria!">
+  <meta property="og:title" content="4º Aniversário da Micaella! 🌺🌊">
+  <meta property="og:description" content="O horizonte me chama! Venha comemorar os 4 aninhos da Micaella em uma grande aventura tropical!">
+  <meta property="og:image" content="assets/fotos/aniversariante.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800;900&family=Outfit:wght@400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css?v=2.1">
+</head>
+<body class="theme-moana-cinematic">
+
+  <!-- ============================================================== -->
+  <!-- 1. ABERTURA CINEMATOGRÁFICA                                    -->
+  <!-- ============================================================== -->
+  <div id="cinematic-curtain" class="cinematic-overlay" role="dialog" aria-modal="true" aria-label="Abertura do Convite">
+    <canvas id="intro-particles-canvas" class="intro-canvas"></canvas>
+
+    <div class="cinematic-content">
+      <div class="brand-signature" id="intro-brand">
+        <span class="brand-sparkle">🌺</span>
+        <span class="brand-name">UM MAR DE AVENTURAS</span>
+        <span class="brand-tagline">APRESENTA UMA CELEBRAÇÃO INESQUECÍVEL</span>
+      </div>
+
+      <div class="cinematic-hero-reveal" id="intro-hero">
+        <div class="cinematic-badge">🌊 Tema Moana ⛵</div>
+        <h1 class="cinematic-title" id="intro-title">Micaella</h1>
+        <div class="cinematic-age-tag" id="intro-age">FAZ 4 ANINHOS</div>
+        <p class="cinematic-quote" id="intro-quote">"O horizonte me chama! Venha viver uma grande aventura tropical no meu 4º aniversário!"</p>
+      </div>
+
+      <div class="cinematic-actions">
+        <button type="button" id="btn-enter-experience" class="btn-enter-cinematic" aria-label="Entrar na Experiência com Som">
+          <span class="btn-pulse-ring"></span>
+          <span class="btn-icon">🌺</span>
+          <span class="btn-text">ENTRAR NA EXPERIÊNCIA</span>
+          <span class="btn-sound-indicator">🔊</span>
+        </button>
+
+        <div class="intro-controls">
+          <button type="button" id="btn-skip-intro" class="btn-text-subtle" title="Pular Abertura">
+            Pular Introdução ⏭️
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feixes de Luz Volumétrica Animados -->
+    <div class="volumetric-light-shafts" aria-hidden="true">
+      <div class="light-beam beam-1"></div>
+      <div class="light-beam beam-2"></div>
+      <div class="light-beam beam-3"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 2. AMBIENTE VISUAL & EFEITOS DE FUNDO                          -->
+  <!-- ============================================================== -->
+  <canvas id="ambient-particles-canvas" class="ambient-canvas"></canvas>
+
+  <div class="parallax-decorations" aria-hidden="true">
+    <span class="floating-flora f1">🌺</span>
+    <span class="floating-flora f2">🌊</span>
+    <span class="floating-flora f3">🌴</span>
+    <span class="floating-flora f4">🐚</span>
+    <span class="floating-flora f5">✨</span>
+    <span class="floating-flora f6">⛵</span>
+    <span class="floating-flora f7">🐢</span>
+    <span class="floating-flora f8">🥥</span>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 3. BARRA FLUTUANTE SUPERIOR (PLAYER DE ÁUDIO & PAINEL)         -->
+  <!-- ============================================================== -->
+  <header class="top-control-bar" id="top-bar">
+    <div class="control-bar-inner">
+      <button type="button" id="btn-music-toggle" class="luxury-pill-btn music-btn" aria-label="Controlar Música">
+        <span class="pulse-note-icon" id="music-icon">🎵</span>
+        <span class="pill-text" id="music-label">Música da Moana 🌺</span>
+        <span class="mini-equalizer" id="equalizer" aria-hidden="true">
+          <span class="eq-bar bar1"></span>
+          <span class="eq-bar bar2"></span>
+          <span class="eq-bar bar3"></span>
+        </span>
+      </button>
+
+      <a href="admin.html" class="luxury-pill-btn admin-btn" title="Área Administrativa">
+        <span class="icon">⚙️</span>
+        <span class="pill-text">Painel</span>
+      </a>
+    </div>
+
+    <audio id="audio-theme" loop preload="auto">
+      <source src="assets/audio/moana-musica.mp3" type="audio/mpeg">
+    </audio>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- 4. CONTEÚDO PRINCIPAL DO CONVITE                               -->
+  <!-- ============================================================== -->
+  <main class="main-container">
+
+    <!-- HERO SECTION: FOTO REAL DA MICAELLA COM MOLDURA TROPICAL -->
+    <section class="hero-section">
+      <div class="cinematic-ribbon">
+        <span>🌺 VOCÊ É NOSSO CONVIDADO ESPECIAL 🌊</span>
+      </div>
+
+      <div class="portrait-container">
+        <div class="portrait-glow-halo"></div>
+        <div class="portrait-frame" id="portrait-frame" title="Toque na foto para ouvir a música!">
+          <img id="child-photo" src="assets/fotos/aniversariante.jpg" alt="Foto da Aniversariante Micaella" class="portrait-image">
+          
+          <div class="frame-flower tr">🌺</div>
+          <div class="frame-flower bl">🌴</div>
+          <div class="frame-flower br">🐚</div>
+          <div class="frame-flower tl">✨</div>
+
+          <button type="button" class="photo-sound-touch" id="btn-touch-photo" aria-label="Tocar Música">
+            <span class="play-symbol">▶️</span>
+            <span class="play-hint">Toque para ouvir a música</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="celebration-header">
+        <div class="theme-tagline" id="event-theme-tag">🌊 Tema: Moana - Um Mar de Aventuras ⛵</div>
+        <h2 class="celebration-title" id="event-title">4º Aniversário da Micaella!</h2>
+        <div class="age-badge" id="event-age-badge">🌺 4 Aninhos de Pura Alegria 🌺</div>
+        <p class="celebration-subtitle" id="event-subtitle">
+          O horizonte me chama! Venha comemorar os 4 aninhos da Micaella em uma grande aventura tropical com piscina, sol e muita diversão!
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTAGEM REGRESSIVA ANIMADA -->
+    <section class="card countdown-card" id="section-countdown">
+      <div class="card-glow-bg"></div>
+      <h3 class="card-headline">
+        <span class="icon">⛵</span> O Barco Zarpa Em:
+      </h3>
+      <div class="countdown-grid" id="countdown-grid">
+        <div class="time-tile">
+          <span class="time-digit" id="days">00</span>
+          <span class="time-label">Dias</span>
+        </div>
+        <div class="time-tile">
+          <span class="time-digit" id="hours">00</span>
+          <span class="time-label">Horas</span>
+        </div>
+        <div class="time-tile">
+          <span class="time-digit" id="minutes">00</span>
+          <span class="time-label">Min</span>
+        </div>
+        <div class="time-tile">
+          <span class="time-digit" id="seconds">00</span>
+          <span class="time-label">Seg</span>
+        </div>
+      </div>
+      <p class="countdown-footer-text">Prepare o coração para uma grande aventura no oceano!</p>
+    </section>
+
+    <!-- PROGRAMAÇÃO E DETALHES DO EVENTO -->
+    <section class="card info-card" id="section-details">
+      <div class="card-glow-bg"></div>
+      <h3 class="card-headline">
+        <span class="icon">📅</span> Informações da Festa
+      </h3>
+
+      <div class="event-details-grid">
+        <div class="detail-box">
+          <div class="detail-icon">🗓️</div>
+          <div class="detail-content">
+            <span class="detail-title">Data do Evento</span>
+            <strong class="detail-value" id="event-date-display">19 de Dezembro de 2026</strong>
+            <span class="detail-sub">Sábado de Sol e Diversão</span>
+          </div>
+        </div>
+
+        <div class="detail-box">
+          <div class="detail-icon">⏰</div>
+          <div class="detail-content">
+            <span class="detail-title">Horário</span>
+            <strong class="detail-value" id="event-time-display">10:00 às 18:00</strong>
+            <span class="detail-sub">Piscina liberada o dia todo!</span>
+          </div>
+        </div>
+
+        <div class="detail-box highlight-box">
+          <div class="detail-icon">🎂</div>
+          <div class="detail-content">
+            <span class="detail-title">Parabéns & Bolo</span>
+            <strong class="detail-value" id="event-cake-display">Às 16:00 da tarde</strong>
+            <span class="detail-sub">Momento especial do bolo e velinhas!</span>
+          </div>
+        </div>
+
+        <div class="detail-box">
+          <div class="detail-icon">📍</div>
+          <div class="detail-content">
+            <span class="detail-title">Localização</span>
+            <strong class="detail-value" id="event-location-name">Festa da Micaella</strong>
+            <span class="detail-sub" id="event-address-display">Rua Ouro Velho, 116</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Caixa de Recado Especial / Piscina -->
+      <div class="special-note-box">
+        <div class="note-icon">🏊‍♀️☀️</div>
+        <div class="note-text" id="event-description-display">
+          Se no dia tiver sol, teremos piscina liberada a partir das 10:00 da manhã! Traga roupa de banho e toalha para se refrescar. O corte do bolo será às 16:00 da tarde! Venha comemorar esses 4 aninhos inesquecíveis da nossa linda Micaella!
+        </div>
+      </div>
+
+      <!-- Botões de Rotas (Google Maps + Waze) -->
+      <div class="route-buttons-container">
+        <a id="btn-google-maps" href="https://www.google.com/maps/search/?api=1&query=Rua+Ouro+Velho%2C+116" target="_blank" rel="noopener" class="btn-route maps-btn">
+          <span class="btn-icon">🗺️</span>
+          <span>Abrir no Google Maps</span>
+        </a>
+        <a id="btn-waze" href="https://waze.com/ul?q=Rua+Ouro+Velho+116" target="_blank" rel="noopener" class="btn-route waze-btn">
+          <span class="btn-icon">🚗</span>
+          <span>Navegar pelo Waze</span>
+        </a>
+      </div>
+
+      <!-- Ações Rápidas: Adicionar ao Calendário & Compartilhar -->
+      <div class="quick-utilities">
+        <button type="button" class="util-btn" onclick="addToCalendar()">
+          <span>📅 Adicionar ao Calendário</span>
+        </button>
+        <button type="button" class="util-btn" onclick="shareOnWhatsApp()">
+          <span>💬 Compartilhar no WhatsApp</span>
+        </button>
+        <button type="button" class="util-btn" onclick="openQrModal()">
+          <span>📱 Ver QR Code de Acesso</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- GALERIA DE FOTOS DA MICAELLA COM LIGHTBOX -->
+    <section class="card gallery-card" id="section-gallery">
+      <div class="card-glow-bg"></div>
+      <h3 class="card-headline">
+        <span class="icon">📸</span> Momentos Lindos da Micaella
+      </h3>
+      <p class="section-lead">Clique em qualquer foto para ampliar e ver em tamanho real:</p>
+
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- Fotos de foto1.jpg a foto10.jpg renderizadas via JavaScript -->
+      </div>
+    </section>
+
+    <!-- CONFIRMAÇÃO DE PRESENÇA (RSVP) -->
+    <section class="card rsvp-card" id="section-rsvp">
+      <div class="card-glow-bg"></div>
+      <div class="rsvp-header">
+        <span class="rsvp-badge">🌺 CONFIRMAÇÃO OBRIGATÓRIA 🌊</span>
+        <h3 class="card-headline">Confirmação de Presença</h3>
+        <p class="section-lead">
+          Por favor, confirme sua presença até <strong id="rsvp-deadline-text">12/12/2026</strong> para organizarmos tudo com muito carinho!
+        </p>
+      </div>
+
+      <form id="rsvp-form" class="rsvp-form" onsubmit="handleRsvpSubmit(event)">
+        <div class="attendance-toggle-group">
+          <label class="attendance-pill active" id="pill-attending-yes">
+            <input type="radio" name="attending" value="yes" checked onchange="updateAttendanceChoice(true)">
+            <span>✅ Sim, com certeza irei!</span>
+          </label>
+          <label class="attendance-pill" id="pill-attending-no">
+            <input type="radio" name="attending" value="no" onchange="updateAttendanceChoice(false)">
+            <span>❌ Infelizmente não poderei</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="guest-name" class="form-label">Seu Nome Completo: <span class="req">*</span></label>
+          <input type="text" id="guest-name" name="name" required placeholder="Ex: Juliana Silva" class="form-input">
+        </div>
+
+        <div id="attending-details-fields">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="guest-adults" class="form-label">Adultos (inc. você):</label>
+              <div class="number-stepper">
+                <button type="button" class="step-btn" onclick="adjustCount('guest-adults', -1)">-</button>
+                <input type="number" id="guest-adults" name="adults" min="1" max="15" value="1" class="step-input" readonly>
+                <button type="button" class="step-btn" onclick="adjustCount('guest-adults', 1)">+</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="guest-children" class="form-label">Crianças:</label>
+              <div class="number-stepper">
+                <button type="button" class="step-btn" onclick="adjustCount('guest-children', -1)">-</button>
+                <input type="number" id="guest-children" name="children" min="0" max="15" value="0" class="step-input" readonly>
+                <button type="button" class="step-btn" onclick="adjustCount('guest-children', 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="guest-companions" class="form-label">Nome dos Acompanhantes / Idades das Crianças:</label>
+            <input type="text" id="guest-companions" name="companionNames" placeholder="Ex: Roberto, Luquinhas (3 anos)" class="form-input">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="guest-message" class="form-label">Recadinho Carinhoso para a Micaella (Opcional):</label>
+          <textarea id="guest-message" name="message" rows="3" placeholder="Escreva uma mensagem especial para a Micaella..." class="form-textarea"></textarea>
+        </div>
+
+        <button type="submit" id="btn-submit-rsvp" class="btn-submit-luxury">
+          <span class="btn-text">Confirmar Minha Resposta 🌺</span>
+          <span class="btn-loader" style="display: none;">Enviando...</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- GRUPO DO WHATSAPP DA FESTA -->
+    <section class="card whatsapp-card">
+      <div class="card-glow-bg"></div>
+      <div class="whatsapp-box">
+        <div class="wa-icon">💬</div>
+        <div class="wa-info">
+          <h4>Grupo no WhatsApp dos Convidados</h4>
+          <p>Entre no grupo oficial da festa para acompanhar fotos, avisos em tempo real e interagir com todos os convidados!</p>
+        </div>
+        <a id="btn-wa-group" href="https://chat.whatsapp.com/FdhFkFGozFEDvBZ2woKcJ0" target="_blank" rel="noopener" class="btn-wa-join">
+          Entrar no Grupo Oficial
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- 5. RODAPÉ                                                      -->
+  <!-- ============================================================== -->
+  <footer class="footer-cinematic">
+    <div class="footer-inner">
+      <h4 class="brand-title">4º ANIVERSÁRIO DA MICAELLA</h4>
+      <p class="brand-slogan">"O horizonte me chama!"</p>
+      <p class="footer-copy">
+        Um dia mágico preparado com todo amor e carinho para você e sua família.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ============================================================== -->
+  <!-- 6. MODAIS                                                      -->
+  <!-- ============================================================== -->
+  <!-- LIGHTBOX -->
+  <div id="lightbox-modal" class="modal-backdrop" onclick="closeLightbox(event)">
+    <div class="lightbox-dialog" onclick="event.stopPropagation()">
+      <button type="button" class="modal-close-btn" onclick="closeLightbox()">&times;</button>
+      <div class="lightbox-image-wrap">
+        <img id="lightbox-img" src="" alt="Foto da Micaella Ampliada">
+      </div>
+      <div class="lightbox-caption">
+        <h4 id="lightbox-title">Foto da Micaella</h4>
+        <p id="lightbox-desc">Momentos inesquecíveis.</p>
+      </div>
+      <div class="lightbox-nav">
+        <button type="button" class="nav-arrow prev" onclick="navigateLightbox(-1)">&#10094;</button>
+        <button type="button" class="nav-arrow next" onclick="navigateLightbox(1)">&#10095;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QR MODAL -->
+  <div id="qr-modal" class="modal-backdrop" onclick="closeQrModal(event)">
+    <div class="qr-dialog" onclick="event.stopPropagation()">
+      <button type="button" class="modal-close-btn" onclick="closeQrModal()">&times;</button>
+      <div class="qr-header">
+        <span class="icon">📱</span>
+        <h3>Acesse pelo Smartphone</h3>
+        <p>Aponte a câmera do seu celular para abrir o convite digital instantaneamente:</p>
+      </div>
+      <div class="qr-canvas-wrap">
+        <canvas id="qr-code-canvas"></canvas>
+      </div>
+      <div class="qr-footer">
+        <span class="qr-link-copy" id="qr-link-display"></span>
+        <button type="button" class="btn-copy-link" onclick="copyInviteLink()">Copiar Link 📋</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCESSO RSVP -->
+  <div id="success-modal" class="modal-backdrop">
+    <div class="success-dialog">
+      <div class="success-icon-wrap">
+        <span class="sparkle-anim">🎉</span>
+      </div>
+      <h3 id="success-modal-title">Presença Confirmada!</h3>
+      <p id="success-modal-message">Que alegria! Seu nome foi incluído na lista oficial da festa.</p>
+      <button type="button" class="btn-submit-luxury" onclick="closeSuccessModal()">
+        Perfeito! Marcar na Agenda 🌺
+      </button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="app.js?v=2.1"></script>
+</body>
+</html>
