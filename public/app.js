@@ -77,9 +77,13 @@ function populateUI(event) {
   }
   if (event.time && event.endTime) {
     document.getElementById('event-time-display').textContent = `${event.time} às ${event.endTime}`;
+    const featTime = document.getElementById('feature-time-display');
+    if (featTime) featTime.textContent = `${event.time} às ${event.endTime}`;
   }
   if (event.cakeTime) {
     document.getElementById('event-cake-display').textContent = `Às ${event.cakeTime} da tarde`;
+    const featCake = document.getElementById('feature-cake-display');
+    if (featCake) featCake.textContent = `${event.cakeTime} da tarde`;
   }
   if (event.rsvpDeadline) {
     document.getElementById('rsvp-deadline-text').textContent = event.rsvpDeadline;
@@ -375,8 +379,8 @@ function closeSuccessModal() {
 // ==============================================================
 function addToCalendar() {
   const title = encodeURIComponent('4º Aniversário da Micaella! 🌺🌊');
-  const details = encodeURIComponent('Venha comemorar os 4 aninhos da Micaella em uma grande aventura tropical com piscina e sol! Endereço: Rua Ouro Velho, 116.');
-  const location = encodeURIComponent('Rua Ouro Velho, 116');
+  const details = encodeURIComponent('Venha comemorar os 4 aninhos da Micaella em uma grande aventura tropical com piscina e sol! Endereço: Rua Ouro Velho, 116 - Jardim das Cerejeiras, Cotia - SP.');
+  const location = encodeURIComponent('Rua Ouro Velho, 116 - Jardim das Cerejeiras, Cotia - SP, 06724-810');
   const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261219T130000Z/20261219T210000Z&details=${details}&location=${location}`;
   window.open(gcalUrl, '_blank');
 }
